@@ -73,19 +73,22 @@ namespace LWDock
 
         public static void cleanList(ref List<string> paths)
         {
-            List<string> ret = new List<string>();
+            List<string> folders = new List<string>();
+            List<string> files = new List<string>();
             foreach (string path in paths)
             {
                 try
                 {
                     if(Directory.Exists(path)) Directory.EnumerateFileSystemEntries(path);
-                    ret.Add(path);
+                    if (Directory.Exists(path)) folders.Add(path);
+                    else files.Add(path);
                 }
                 catch { continue; }
                 
             }
             paths.Clear();
-            paths.AddRange(ret);
+            paths.AddRange(folders);
+            paths.AddRange(files);
         }
 
         protected override void OnClosed(EventArgs e)
