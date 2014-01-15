@@ -32,7 +32,7 @@ namespace LWDock
         {
             if (amount == 0) return new Size(0, 0);
             Size temp = new Size(vertical ? 0 : amount, vertical ? amount : 0);
-            if (Config.getInstance().tryOneLine && !popup) return new Size(amount, 1);
+            if (Settings.getInstance().tryOneLine && !popup) return new Size(amount, 1);
             int sqrt = (int)Math.Ceiling(Math.Sqrt(amount));
 
             while (amount % sqrt != 0)

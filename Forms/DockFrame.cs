@@ -22,13 +22,13 @@ namespace LWDock
         private Timer timer;
         public bool alwaysOnTop;
 
-        public DockFrame(String folder) : base(folder, Config.getInstance().maxPopups)
+        public DockFrame(String folder) : base(folder, Settings.getInstance().maxPopups)
         {
             InitializeComponent();
-            Config.getInstance().path = folder;
+            Settings.getInstance().path = folder;
             this.folder = folder;
             this.init();
-            Config.getInstance().Changed += this.setttingsUpdated;
+            Settings.getInstance().Changed += this.setttingsUpdated;
             this.SetStyle(ControlStyles.SupportsTransparentBackColor, true);
             //this.TransparencyKey = Color.Black;
             //this.BackgroundImage = new System.Drawing.Bitmap("bg.png");
@@ -91,8 +91,8 @@ namespace LWDock
             if (dialog.ShowDialog() == DialogResult.OK)
             {
                 this.folder = dialog.SelectedPath;
-                Config.getInstance().path = this.folder;
-                Config.getInstance().save();
+                Settings.getInstance().path = this.folder;
+                Settings.getInstance().save();
                 this.init();
             }
         }
@@ -174,15 +174,15 @@ namespace LWDock
 
         private void setttingsUpdated(object sender, EventArgs args)
         {
-            this.TopMost = Config.getInstance().keepOnTop;
-            this.maxNesting = Config.getInstance().maxPopups;
+            this.TopMost = Settings.getInstance().keepOnTop;
+            this.maxNesting = Settings.getInstance().maxPopups;
             this.init();
         }
 
         protected override void OnClosing(CancelEventArgs e)
         {
             base.OnClosing(e);
-            Config.getInstance().save();
+            Settings.getInstance().save();
         }
 
         protected override bool isPopup()

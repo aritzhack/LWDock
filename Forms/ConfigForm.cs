@@ -15,10 +15,10 @@ namespace LWDock.Forms
         public ConfigForm()
         {
             InitializeComponent();
-            this.maxPopupsNumber.Value = Config.getInstance().maxPopups;
-            this.keepOnTopCheckBox.Checked = Config.getInstance().keepOnTop;
-            this.noPopupsCheckBox.Checked = Config.getInstance().maxPopups == 0;
-            this.foldersFirstCheck.Checked = Config.getInstance().foldersFirst;
+            this.maxPopupsNumber.Value = Settings.getInstance().maxPopups;
+            this.keepOnTopCheckBox.Checked = Settings.getInstance().keepOnTop;
+            this.noPopupsCheckBox.Checked = Settings.getInstance().maxPopups == 0;
+            this.foldersFirstCheck.Checked = Settings.getInstance().foldersFirst;
         }
 
         private void cancelButton_Click(object sender, EventArgs e)
@@ -28,11 +28,11 @@ namespace LWDock.Forms
 
         private void saveButton_Click(object sender, EventArgs e)
         {
-            Config.getInstance().maxPopups = this.noPopupsCheckBox.Checked ? 0 : (int)this.maxPopupsNumber.Value;
-            Config.getInstance().keepOnTop = this.keepOnTopCheckBox.Checked;
-            Config.getInstance().foldersFirst = this.foldersFirstCheck.Checked;
-            Config.getInstance().OnChanged();
-            Config.getInstance().save();
+            Settings.getInstance().maxPopups = this.noPopupsCheckBox.Checked ? 0 : (int)this.maxPopupsNumber.Value;
+            Settings.getInstance().keepOnTop = this.keepOnTopCheckBox.Checked;
+            Settings.getInstance().foldersFirst = this.foldersFirstCheck.Checked;
+            Settings.getInstance().OnChanged();
+            Settings.getInstance().save();
             this.Close();
         }
 
@@ -44,11 +44,11 @@ namespace LWDock.Forms
 
         private void resetButton_Click(object sender, EventArgs e)
         {
-            Config.getInstance().resetDefaults();
-            this.maxPopupsNumber.Value = Config.getInstance().maxPopups;
-            this.keepOnTopCheckBox.Checked = Config.getInstance().keepOnTop;
-            this.noPopupsCheckBox.Checked = Config.getInstance().maxPopups == 0;
-            this.foldersFirstCheck.Checked = Config.getInstance().foldersFirst;
+            Settings.getInstance().resetDefaults();
+            this.maxPopupsNumber.Value = Settings.getInstance().maxPopups;
+            this.keepOnTopCheckBox.Checked = Settings.getInstance().keepOnTop;
+            this.noPopupsCheckBox.Checked = Settings.getInstance().maxPopups == 0;
+            this.foldersFirstCheck.Checked = Settings.getInstance().foldersFirst;
         }
     }
 }

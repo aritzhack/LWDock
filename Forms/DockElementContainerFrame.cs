@@ -87,7 +87,7 @@ namespace LWDock
                         Directory.EnumerateFileSystemEntries(path);
                         ret.Add(path);
                     }
-                    else if (File.Exists(path) && Config.getInstance().foldersFirst) files.Add(path);
+                    else if (File.Exists(path) && Settings.getInstance().foldersFirst) files.Add(path);
                     else ret.Add(path);
                 }
                 catch { continue; }

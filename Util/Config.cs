@@ -10,18 +10,18 @@ namespace LWDock
 
     public delegate void ConfigChangedListener(object sender, EventArgs args);
 
-    public class Config
+    public class Settings
     {
 
         private const string CATEGORY = "General";
 
         public event ConfigChangedListener Changed;
 
-        private static Config INSTANCE;
+        private static Settings INSTANCE;
 
-        public static Config getInstance()
+        public static Settings getInstance()
         {
-            if (INSTANCE == null) INSTANCE = new Config(@".\config.ini");
+            if (INSTANCE == null) INSTANCE = new Settings(@".\config.ini");
             return INSTANCE;
         }
 
@@ -35,7 +35,7 @@ namespace LWDock
 
         private readonly string file;
 
-        private Config(string file)
+        private Settings(string file)
         {
             this.file = file;
             this.reload();
