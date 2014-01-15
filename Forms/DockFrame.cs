@@ -175,11 +175,8 @@ namespace LWDock
         private void setttingsUpdated(object sender, EventArgs args)
         {
             this.TopMost = Config.getInstance().keepOnTop;
-            foreach (DockElement element in elements)
-            {
-                element.closePopup();
-                element.maxNesting = Config.getInstance().maxPopups;
-            }
+            this.maxNesting = Config.getInstance().maxPopups;
+            this.init();
         }
 
         protected override void OnClosing(CancelEventArgs e)

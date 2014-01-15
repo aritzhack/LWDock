@@ -25,62 +25,13 @@ namespace LWDock
             return INSTANCE;
         }
 
-        private int _maxPopups;
-        private bool _keepOnTop;
-        private string _path;
-        private bool _tryOneLine;
+        public const bool FOLDER_FIRST_DEFAULT = true, TRY_ONE_LINE_DEFAULT = true, KEEP_ON_TOP_DEFAULT = false;
+        public const int MAX_POPUPS_DEFAULT = -1;
+        public const string PATH_DEFAULT = "";
 
-        public bool tryOneLine
-        {
-            get
-            {
-                return this._tryOneLine;
-            }
-            set
-            {
-                this._tryOneLine = value;
-                this.OnChanged();
-            }
-        }
-
-        public int maxPopups
-        {
-            get
-            {
-                return this._maxPopups;
-            }
-            set {
-                this._maxPopups = value;
-                this.OnChanged();
-            }
-            
-        }
-
-        public bool keepOnTop
-        {
-            get
-            {
-                return this._keepOnTop;
-            }
-            set
-            {
-                this._keepOnTop = value;
-                this.OnChanged();
-            }
-            
-        }
-        public string path
-        {
-            get
-            {
-                return this._path; ;
-            }
-            set
-            {
-                this._path = value;
-                this.OnChanged();
-            }
-        }
+        public bool foldersFirst, tryOneLine, keepOnTop;
+        public int maxPopups;
+        public string path;
 
         private readonly string file;
 
@@ -92,10 +43,11 @@ namespace LWDock
 
         public void reload(){
             IniFile ini = new IniFile(this.file);
-            this._maxPopups = Util.parseInt(ini.IniReadValue(CATEGORY, "maxPopups"), -1);
-            this._keepOnTop = Util.parseBool(ini.IniReadValue(CATEGORY, "keepOnTop"), false);
-            this._tryOneLine = Util.parseBool(ini.IniReadValue(CATEGORY, "tryOneLine"), true);
-            this._path = ini.IniReadValue(CATEGORY, "path");
+            this.maxPopups = Util.parseInt(ini.IniReadValue(CATEGORY, "maxPopups"), MAX_POPUPS_DEFAULT);
+            this.keepOnTop = Util.parseBool(ini.IniReadValue(CATEGORY, "keepOnTop"), KEEP_ON_TOP_DEFAULT);
+            this.tryOneLine = Util.parseBool(ini.IniReadValue(CATEGORY, "tryOneLine"), TRY_ONE_LINE_DEFAULT);
+            this.foldersFirst = Util.parseBool(ini.IniReadValue(CATEGORY, "foldersFirst"), FOLDER_FIRST_DEFAULT);
+            this.path = ini.IniReadValue(CATEGORY, "path");
             this.save();
         }
 
@@ -103,16 +55,26 @@ namespace LWDock
             this.saveAs(this.file);
         }
 
+        public void resetDefaults()
+        {
+            this.maxPopups = MAX_POPUPS_DEFAULT;
+            this.keepOnTop = KEEP_ON_TOP_DEFAULT;
+            this.tryOneLine = TRY_ONE_LINE_DEFAULT;
+            this.foldersFirst = FOLDER_FIRST_DEFAULT;
+            this.path = PATH_DEFAULT;
+        }
+
         public void saveAs(string file)
         {
             IniFile ini = new IniFile(file);
-            ini.IniWriteValue(CATEGORY, "maxPopups", this._maxPopups.ToString());
-            ini.IniWriteValue(CATEGORY, "keepOnTop", this._keepOnTop.ToString());
-            ini.IniWriteValue(CATEGORY, "tryOneLine", this._tryOneLine.ToString());
-            ini.IniWriteValue(CATEGORY, "path", this._path);
+            ini.IniWriteValue(CATEGORY, "maxPopups", this.maxPopups.ToString());
+            ini.IniWriteValue(CATEGORY, "keepOnTop", this.keepOnTop.ToString());
+            ini.IniWriteValue(CATEGORY, "tryOneLine", this.tryOneLine.ToString());
+            ini.IniWriteValue(CATEGORY, "foldersFirst", this.foldersFirst.ToString());
+            ini.IniWriteValue(CATEGORY, "path", this.path);
         }
 
-        private void OnChanged(){
+        public void OnChanged(){
             if(this.Changed != null){
                 this.Changed(this, EventArgs.Empty);
             }

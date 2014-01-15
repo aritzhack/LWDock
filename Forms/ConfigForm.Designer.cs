@@ -34,6 +34,8 @@
             this.cancelButton = new System.Windows.Forms.Button();
             this.saveButton = new System.Windows.Forms.Button();
             this.noPopupsCheckBox = new System.Windows.Forms.CheckBox();
+            this.foldersFirstCheck = new System.Windows.Forms.CheckBox();
+            this.resetButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.maxPopupsNumber)).BeginInit();
             this.SuspendLayout();
             // 
@@ -48,7 +50,7 @@
             // 
             // maxPopupsNumber
             // 
-            this.maxPopupsNumber.Location = new System.Drawing.Point(228, 60);
+            this.maxPopupsNumber.Location = new System.Drawing.Point(229, 60);
             this.maxPopupsNumber.Maximum = new decimal(new int[] {
             10,
             0,
@@ -75,7 +77,7 @@
             // 
             // cancelButton
             // 
-            this.cancelButton.Location = new System.Drawing.Point(196, 86);
+            this.cancelButton.Location = new System.Drawing.Point(203, 109);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(75, 23);
             this.cancelButton.TabIndex = 6;
@@ -85,7 +87,7 @@
             // 
             // saveButton
             // 
-            this.saveButton.Location = new System.Drawing.Point(115, 86);
+            this.saveButton.Location = new System.Drawing.Point(122, 109);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(75, 23);
             this.saveButton.TabIndex = 7;
@@ -104,11 +106,33 @@
             this.noPopupsCheckBox.UseVisualStyleBackColor = true;
             this.noPopupsCheckBox.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
+            // foldersFirstCheck
+            // 
+            this.foldersFirstCheck.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.foldersFirstCheck.Location = new System.Drawing.Point(12, 86);
+            this.foldersFirstCheck.Name = "foldersFirstCheck";
+            this.foldersFirstCheck.Size = new System.Drawing.Size(259, 17);
+            this.foldersFirstCheck.TabIndex = 9;
+            this.foldersFirstCheck.Text = "Folders first";
+            this.foldersFirstCheck.UseVisualStyleBackColor = true;
+            // 
+            // resetButton
+            // 
+            this.resetButton.Location = new System.Drawing.Point(41, 109);
+            this.resetButton.Name = "resetButton";
+            this.resetButton.Size = new System.Drawing.Size(75, 23);
+            this.resetButton.TabIndex = 10;
+            this.resetButton.Text = "Reset";
+            this.resetButton.UseVisualStyleBackColor = true;
+            this.resetButton.Click += new System.EventHandler(this.resetButton_Click);
+            // 
             // ConfigForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 121);
+            this.ClientSize = new System.Drawing.Size(284, 139);
+            this.Controls.Add(this.resetButton);
+            this.Controls.Add(this.foldersFirstCheck);
             this.Controls.Add(this.noPopupsCheckBox);
             this.Controls.Add(this.saveButton);
             this.Controls.Add(this.cancelButton);
@@ -136,6 +160,8 @@
         private System.Windows.Forms.Button cancelButton;
         private System.Windows.Forms.Button saveButton;
         private System.Windows.Forms.CheckBox noPopupsCheckBox;
+        private System.Windows.Forms.CheckBox foldersFirstCheck;
+        private System.Windows.Forms.Button resetButton;
 
     }
 }

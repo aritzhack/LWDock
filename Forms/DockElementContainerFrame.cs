@@ -15,6 +15,7 @@ namespace LWDock
 
         protected Size squareAmount;
         protected List<DockElement> elements;
+        protected bool initialized = false;
         public int maxNesting;
 
         public DockElementContainerFrame()
@@ -41,6 +42,7 @@ namespace LWDock
 
         protected virtual void init(List<string> paths)
         {
+            if (this.initialized) this.Visible = false;
             DockElementContainerFrame.cleanList(ref paths);
 
             this.Controls.Clear();
@@ -69,26 +71,37 @@ namespace LWDock
             }
 
             this.Size = DockElement.getFinalSize(this.squareAmount);
+            if(this.initialized) this.Visible = true;
         }
 
         public static void cleanList(ref List<string> paths)
         {
-            List<string> folders = new List<string>();
+            List<string> ret = new List<string>();
             List<string> files = new List<string>();
             foreach (string path in paths)
             {
                 try
                 {
-                    if(Directory.Exists(path)) Directory.EnumerateFileSystemEntries(path);
-                    if (Directory.Exists(path)) folders.Add(path);
-                    else files.Add(path);
+                    if(Directory.Exists(path))
+                    {
+                        Directory.EnumerateFileSystemEntries(path);
+                        ret.Add(path);
+                    }
+                    else if (File.Exists(path) && Config.getInstance().foldersFirst) files.Add(path);
+                    else ret.Add(path);
                 }
                 catch { continue; }
                 
             }
             paths.Clear();
-            paths.AddRange(folders);
+            paths.AddRange(ret);
             paths.AddRange(files);
+        }
+
+        protected override void OnLoad(EventArgs e)
+        {
+            base.OnLoad(e);
+            this.initialized = true;
         }
 
         protected override void OnClosed(EventArgs e)
