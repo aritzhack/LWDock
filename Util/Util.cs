@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Microsoft.WindowsAPICodePack.Shell;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -20,6 +22,46 @@ namespace LWDock
         public static Icon GetLargeIcon(string fileName)
         {
             return WAPI.GetIcon(fileName, WAPI.SHGFI_LARGEICON);
+        }
+
+        public static Bitmap getIcon(string filename)
+        {
+            if (ShellFile.IsPlatformSupported && ShellFolder.IsPlatformSupported)
+            {
+
+                ShellObject shObj;
+                Bitmap bm;
+
+                if (Directory.Exists(filename))
+                {
+                    shObj = ShellFolder.FromParsingName(filename);
+                    return GetLargeIcon(filename).ToBitmap();
+                }
+                else
+                {
+                    shObj = ShellFile.FromFilePath(filename);
+                }
+
+                ShellThumbnail thumbnail = shObj.Thumbnail;
+
+                try
+                {
+                    bm = thumbnail.MediumBitmap;
+                    if (bm != null)
+                    {
+                        shObj.Dispose();
+
+                        bm.MakeTransparent(Color.Black);
+                        return bm;
+                    }
+                }
+                catch
+                {
+                    bm = null;
+                }
+                shObj.Dispose();
+            }
+            return GetLargeIcon(filename).ToBitmap();
         }
 
         public static Bitmap scale(Bitmap bitmap, float scale)
@@ -86,6 +128,11 @@ namespace LWDock
             {
                 return def;
             }
+        }
+
+        public static Image resize(Bitmap icon, int p1, int p2)
+        {
+            return new Bitmap(icon, p1, p2);
         }
     }
 }

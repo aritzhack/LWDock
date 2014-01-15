@@ -10,18 +10,20 @@ namespace LWDock
 {
     class DockElementButton : Button
     {
-        public DockElementButton(Icon icon, Size size, Point location, DockElement parent)
+        public DockElementButton(Bitmap icon, Size size, Point location, DockElement parent)
         {
             this.FlatStyle = FlatStyle.Flat;
+            this.UseVisualStyleBackColor = false;
             this.TabStop = false;
-            this.FlatAppearance.BorderSize = 0;
-            this.Image = Util.scale(icon.ToBitmap(), 1.3f);
-            this.Size = size;
-            this.Location = location;
             this.MouseUp += parent.button_Click;
             this.BackColor = Color.Transparent;
             this.ForeColor = Color.Transparent;
-            this.UseVisualStyleBackColor = false;
+            this.FlatAppearance.BorderSize = 0;
+            this.Image = Util.resize(icon, DockElement.BUTTON_SIZE, DockElement.BUTTON_SIZE);
+            this.Size = size;
+            this.Location = location;
+
+            
         }
     }
 }

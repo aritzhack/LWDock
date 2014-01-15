@@ -40,13 +40,12 @@ namespace LWDock
 
             this.isNonEmptyFolder = Directory.Exists(path) && !File.Exists(path) && Directory.EnumerateFileSystemEntries(path).Any();
 
-            this.icon = Util.GetLargeIcon(path);
             this.path = path;
 
             Size size = new Size(BUTTON_SIZE, BUTTON_SIZE);
             Point location = new Point(x * HBUTTON_SIZE + HMARGIN_BETWEEN_BUTTONS, TOP_BUTTON_MARGIN + y * VBUTTON_SIZE);
 
-            this.button = new DockElementButton(icon, size, location, this);
+            this.button = new DockElementButton(Util.getIcon(path), size, location, this);
 
             if (File.Exists(path) && File.GetAttributes(path).HasFlag(FileAttributes.Hidden)) this.button.ForeColor = Color.FromArgb(100, this.button.ForeColor);
 

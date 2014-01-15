@@ -29,10 +29,6 @@ namespace LWDock
             this.folder = folder;
             this.init();
             Settings.getInstance().Changed += this.setttingsUpdated;
-            this.SetStyle(ControlStyles.SupportsTransparentBackColor, true);
-            //this.TransparencyKey = Color.Black;
-            //this.BackgroundImage = new System.Drawing.Bitmap("bg.png");
-            //this.BackgroundImageLayout = ImageLayout.Stretch;
         }
 
         private static IEnumerable<string> getSubFileFolders(String folder)
@@ -101,16 +97,6 @@ namespace LWDock
         {
             base.OnLoad(e);
             this.init();
-
-            //TODO: Check if there's any way to use this
-            /*GraphicsPath path = new GraphicsPath();
-            foreach (DockElement element in this.elements)
-            {
-                path.AddRectangle(element.button.Bounds);
-                path.AddRectangle(element.label.Bounds);
-            }
-            Region region = new Region(path);  
-            this.Region = region;*/
         }
 
         private void move()

@@ -102,6 +102,7 @@ namespace LWDock
         {
             base.OnLoad(e);
             this.initialized = true;
+            this.BackColor = Color.LightGray;
         }
 
         protected override void OnClosed(EventArgs e)
