@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace LWDock.Config
 {
-    interface ConfigSaver
+    public interface ConfigSaver
     {
-
-        public void writeConfig(Config config);
-        public void writeProperties(Map map)
+        string getConfigFile();
+        void writeConfig(Config config);
+        void writeProperties(Dictionary<string, Property> properties);
+        void writeProperties(IEnumerable<Property> properties);
     }
 }

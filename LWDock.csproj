@@ -69,6 +69,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Config\Config.cs" />
+    <Compile Include="Config\ConfigReader.cs" />
+    <Compile Include="Config\ConfigSaver.cs" />
+    <Compile Include="Config\IniSaver.cs" />
+    <Compile Include="Config\Property.cs" />
     <Compile Include="DockElementButton.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -100,7 +105,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings.cs" />
-    <Compile Include="Util\Config.cs" />
+    <Compile Include="Util\Icons.cs" />
     <Compile Include="Util\IniFile.cs" />
     <Compile Include="Util\Util.cs" />
     <Compile Include="Util\WAPI.cs" />
