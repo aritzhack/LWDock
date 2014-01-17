@@ -8,12 +8,12 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using LWDock.Forms;
 
 namespace LWDock
 {
     static class Util
     {
-
         public static Icon GetSmallIcon(string fileName)
         {
             return WAPI.GetIcon(fileName, WAPI.SHGFI_SMALLICON);
@@ -26,9 +26,8 @@ namespace LWDock
 
         public static Bitmap getIcon(string filename)
         {
-            if (ShellFile.IsPlatformSupported && ShellFolder.IsPlatformSupported)
+            if (ShellFile.IsPlatformSupported && ShellFolder.IsPlatformSupported && Settings.getInstance().iconQuality != (int)IconQuality.Minimum)
             {
-
                 ShellObject shObj;
                 Bitmap bm;
 
@@ -43,10 +42,10 @@ namespace LWDock
                 }
 
                 ShellThumbnail thumbnail = shObj.Thumbnail;
-
+                int quality = Settings.getInstance().iconQuality;
                 try
                 {
-                    bm = thumbnail.MediumBitmap;
+                    bm = quality == (int)IconQuality.Medium ? thumbnail.MediumBitmap : quality == (int)IconQuality.Small ? thumbnail.SmallBitmap : quality == (int)IconQuality.Big ? thumbnail.LargeBitmap : thumbnail.MediumBitmap;
                     if (bm != null)
                     {
                         shObj.Dispose();

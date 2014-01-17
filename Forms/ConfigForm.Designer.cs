@@ -36,6 +36,8 @@
             this.noPopupsCheckBox = new System.Windows.Forms.CheckBox();
             this.foldersFirstCheck = new System.Windows.Forms.CheckBox();
             this.resetButton = new System.Windows.Forms.Button();
+            this.iconQualityLabel = new System.Windows.Forms.Label();
+            this.iconQuality = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.maxPopupsNumber)).BeginInit();
             this.SuspendLayout();
             // 
@@ -77,7 +79,7 @@
             // 
             // cancelButton
             // 
-            this.cancelButton.Location = new System.Drawing.Point(203, 109);
+            this.cancelButton.Location = new System.Drawing.Point(197, 144);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(75, 23);
             this.cancelButton.TabIndex = 6;
@@ -87,7 +89,7 @@
             // 
             // saveButton
             // 
-            this.saveButton.Location = new System.Drawing.Point(122, 109);
+            this.saveButton.Location = new System.Drawing.Point(116, 144);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(75, 23);
             this.saveButton.TabIndex = 7;
@@ -118,7 +120,7 @@
             // 
             // resetButton
             // 
-            this.resetButton.Location = new System.Drawing.Point(41, 109);
+            this.resetButton.Location = new System.Drawing.Point(35, 144);
             this.resetButton.Name = "resetButton";
             this.resetButton.Size = new System.Drawing.Size(75, 23);
             this.resetButton.TabIndex = 10;
@@ -126,11 +128,36 @@
             this.resetButton.UseVisualStyleBackColor = true;
             this.resetButton.Click += new System.EventHandler(this.resetButton_Click);
             // 
+            // iconQualityLabel
+            // 
+            this.iconQualityLabel.AutoSize = true;
+            this.iconQualityLabel.Location = new System.Drawing.Point(13, 112);
+            this.iconQualityLabel.Name = "iconQualityLabel";
+            this.iconQualityLabel.Size = new System.Drawing.Size(61, 13);
+            this.iconQualityLabel.TabIndex = 12;
+            this.iconQualityLabel.Text = "Icon quality";
+            // 
+            // iconQuality
+            // 
+            this.iconQuality.FormattingEnabled = true;
+            this.iconQuality.Items.AddRange(new object[] {
+            "Minimum",
+            "Small",
+            "Medium",
+            "Big"});
+            this.iconQuality.Location = new System.Drawing.Point(150, 109);
+            this.iconQuality.Name = "iconQuality";
+            this.iconQuality.Size = new System.Drawing.Size(121, 21);
+            this.iconQuality.TabIndex = 13;
+            this.iconQuality.SelectedIndexChanged += new System.EventHandler(this.iconQuality_SelectedIndexChanged);
+            // 
             // ConfigForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 139);
+            this.ClientSize = new System.Drawing.Size(284, 173);
+            this.Controls.Add(this.iconQuality);
+            this.Controls.Add(this.iconQualityLabel);
             this.Controls.Add(this.resetButton);
             this.Controls.Add(this.foldersFirstCheck);
             this.Controls.Add(this.noPopupsCheckBox);
@@ -162,6 +189,8 @@
         private System.Windows.Forms.CheckBox noPopupsCheckBox;
         private System.Windows.Forms.CheckBox foldersFirstCheck;
         private System.Windows.Forms.Button resetButton;
+        private System.Windows.Forms.Label iconQualityLabel;
+        private System.Windows.Forms.ComboBox iconQuality;
 
     }
 }

@@ -16,8 +16,6 @@ namespace LWDock
             this.UseVisualStyleBackColor = false;
             this.TabStop = false;
             this.MouseUp += parent.button_Click;
-            this.BackColor = Color.Transparent;
-            this.ForeColor = Color.Transparent;
             this.FlatAppearance.BorderSize = 0;
             this.Image = Util.resize(icon, DockElement.BUTTON_SIZE, DockElement.BUTTON_SIZE);
             this.Size = size;

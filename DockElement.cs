@@ -47,7 +47,8 @@ namespace LWDock
 
             this.button = new DockElementButton(Util.getIcon(path), size, location, this);
 
-            if (File.Exists(path) && File.GetAttributes(path).HasFlag(FileAttributes.Hidden)) this.button.ForeColor = Color.FromArgb(100, this.button.ForeColor);
+            if (File.Exists(path) && File.GetAttributes(path).HasFlag(FileAttributes.Hidden)) this.button.ForeColor = Color.FromArgb(100, Color.Red);
+            else if ((new DirectoryInfo(this.path).Attributes & FileAttributes.Hidden) == FileAttributes.Hidden) this.button.ForeColor = Color.FromArgb(100, Color.Red);
 
             this.label = new Label();
             this.label.MaximumSize = new Size(BUTTON_SIZE + HMARGIN_BETWEEN_BUTTONS, LABEL_HEIGHT);

@@ -28,12 +28,12 @@ namespace LWDock
             return INSTANCE;
         }
 
-        public const bool FOLDER_FIRST_DEFAULT = true, TRY_ONE_LINE_DEFAULT = true, KEEP_ON_TOP_DEFAULT = false;
-        public const int MAX_POPUPS_DEFAULT = -1;
+        public const bool FOLDER_FIRST_DEFAULT = true, TRY_ONE_LINE_DEFAULT = true, KEEP_ON_TOP_DEFAULT = false, SIMPLE_ICONS_DEFAULT = false;
+        public const int MAX_POPUPS_DEFAULT = -1, DEFAULT_ICON_QUALITY = 2;
         public const string PATH_DEFAULT = "";
 
         public bool foldersFirst, tryOneLine, keepOnTop;
-        public int maxPopups;
+        public int maxPopups, iconQuality;
         public string path;
 
         private readonly string file;
@@ -41,7 +41,7 @@ namespace LWDock
         private Settings(string file)
         {
             this.saver = new IniSaver(file);
-            
+            this.file = file;
             this.reload();
         }
 
@@ -49,6 +49,7 @@ namespace LWDock
             IniFile ini = new IniFile(this.file);
             this.config = this.saver.readFile();
             this.maxPopups = Util.parseInt(this.config.getValue("maxPopups"), MAX_POPUPS_DEFAULT);
+            this.iconQuality = Util.parseInt(this.config.getValue("iconQuality"), DEFAULT_ICON_QUALITY);
             this.keepOnTop = Util.parseBool(this.config.getValue("keepOnTop"), KEEP_ON_TOP_DEFAULT);
             this.tryOneLine = Util.parseBool(this.config.getValue("tryOneLine"), TRY_ONE_LINE_DEFAULT);
             this.foldersFirst = Util.parseBool(this.config.getValue("foldersFirst"), FOLDER_FIRST_DEFAULT);
@@ -58,7 +59,7 @@ namespace LWDock
         }
 
         public void save(){
-            this.saveAs(this.file);
+            this.saveAs(this.saver);
         }
 
         public void resetDefaults()
@@ -67,17 +68,19 @@ namespace LWDock
             this.keepOnTop = KEEP_ON_TOP_DEFAULT;
             this.tryOneLine = TRY_ONE_LINE_DEFAULT;
             this.foldersFirst = FOLDER_FIRST_DEFAULT;
+            this.iconQuality = DEFAULT_ICON_QUALITY;
             // this.path = PATH_DEFAULT;
         }
 
-        public void saveAs(string file)
+        public void saveAs(ConfigSaver saver)
         {
             this.config.setProperty("maxPopups", this.maxPopups);
             this.config.setProperty("keepOnTop", this.keepOnTop);
             this.config.setProperty("tryOneLine", this.tryOneLine);
             this.config.setProperty("foldersFirst", this.foldersFirst);
             this.config.setProperty("path", this.path);
-            this.saver.writeConfig(config);
+            this.config.setProperty("iconQuality", this.iconQuality);
+            saver.writeConfig(config);
         }
 
         public void OnChanged(){
