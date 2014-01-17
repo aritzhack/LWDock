@@ -52,7 +52,7 @@
     <SkipPostSharp>True</SkipPostSharp>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>icon.ico</ApplicationIcon>
+    <ApplicationIcon>res\icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.WindowsAPICodePack, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -87,52 +87,52 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Config\Config.cs" />
-    <Compile Include="Config\ConfigReader.cs" />
-    <Compile Include="Config\ConfigSaver.cs" />
-    <Compile Include="Config\IniSaver.cs" />
-    <Compile Include="Config\Property.cs" />
-    <Compile Include="DockElementButton.cs">
+    <Compile Include="src\Config\Config.cs" />
+    <Compile Include="src\Config\ConfigReader.cs" />
+    <Compile Include="src\Config\ConfigSaver.cs" />
+    <Compile Include="src\Config\IniSaver.cs" />
+    <Compile Include="src\Config\Property.cs" />
+    <Compile Include="src\DockElementButton.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Forms\BorderlessFrame.cs">
+    <Compile Include="src\Forms\BorderlessFrame.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="DockElement.cs" />
-    <Compile Include="Forms\ConfigForm.cs">
+    <Compile Include="src\DockElement.cs" />
+    <Compile Include="src\Forms\ConfigForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\ConfigForm.Designer.cs">
+    <Compile Include="src\Forms\ConfigForm.Designer.cs">
       <DependentUpon>ConfigForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\DockElementContainerFrame.cs">
+    <Compile Include="src\Forms\DockElementContainerFrame.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\DockFrame.cs">
+    <Compile Include="src\Forms\DockFrame.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\DockFrame.Designer.cs">
+    <Compile Include="src\Forms\DockFrame.Designer.cs">
       <DependentUpon>DockFrame.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\PopupFolder.cs">
+    <Compile Include="src\Forms\PopupFolder.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\PopupFolder.Designer.cs">
+    <Compile Include="src\Forms\PopupFolder.Designer.cs">
       <DependentUpon>PopupFolder.cs</DependentUpon>
     </Compile>
-    <Compile Include="Program.cs" />
+    <Compile Include="src\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Settings.cs" />
-    <Compile Include="Util\IniFile.cs" />
-    <Compile Include="Util\Util.cs" />
-    <Compile Include="Util\WAPI.cs" />
-    <EmbeddedResource Include="Forms\ConfigForm.resx">
+    <Compile Include="src\Settings.cs" />
+    <Compile Include="src\Util\IniFile.cs" />
+    <Compile Include="src\Util\Util.cs" />
+    <Compile Include="src\Util\WAPI.cs" />
+    <EmbeddedResource Include="src\Forms\ConfigForm.resx">
       <DependentUpon>ConfigForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\DockFrame.resx">
+    <EmbeddedResource Include="src\Forms\DockFrame.resx">
       <DependentUpon>DockFrame.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\PopupFolder.resx">
+    <EmbeddedResource Include="src\Forms\PopupFolder.resx">
       <DependentUpon>PopupFolder.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -180,6 +180,7 @@
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

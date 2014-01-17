@@ -11,6 +11,7 @@ namespace LWDock
         [STAThread]
         static void Main(string[] args)
         {
+            CHelloWorld.sayHello();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
