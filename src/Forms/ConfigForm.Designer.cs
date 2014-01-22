@@ -38,6 +38,7 @@
             this.resetButton = new System.Windows.Forms.Button();
             this.iconQualityLabel = new System.Windows.Forms.Label();
             this.iconQuality = new System.Windows.Forms.ComboBox();
+            this.runWithWindows = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.maxPopupsNumber)).BeginInit();
             this.SuspendLayout();
             // 
@@ -47,7 +48,7 @@
             this.maxPopupsLabel.Location = new System.Drawing.Point(12, 62);
             this.maxPopupsLabel.Name = "maxPopupsLabel";
             this.maxPopupsLabel.Size = new System.Drawing.Size(185, 13);
-            this.maxPopupsLabel.TabIndex = 5;
+            this.maxPopupsLabel.TabIndex = 0;
             this.maxPopupsLabel.Text = "Max nested popups (-1 means infinite)";
             // 
             // maxPopupsNumber
@@ -65,7 +66,7 @@
             -2147483648});
             this.maxPopupsNumber.Name = "maxPopupsNumber";
             this.maxPopupsNumber.Size = new System.Drawing.Size(43, 20);
-            this.maxPopupsNumber.TabIndex = 4;
+            this.maxPopupsNumber.TabIndex = 3;
             // 
             // keepOnTopCheckBox
             // 
@@ -73,26 +74,26 @@
             this.keepOnTopCheckBox.Location = new System.Drawing.Point(12, 12);
             this.keepOnTopCheckBox.Name = "keepOnTopCheckBox";
             this.keepOnTopCheckBox.Size = new System.Drawing.Size(259, 18);
-            this.keepOnTopCheckBox.TabIndex = 3;
+            this.keepOnTopCheckBox.TabIndex = 1;
             this.keepOnTopCheckBox.Text = "Keep always on top";
             this.keepOnTopCheckBox.UseVisualStyleBackColor = true;
             // 
             // cancelButton
             // 
-            this.cancelButton.Location = new System.Drawing.Point(197, 144);
+            this.cancelButton.Location = new System.Drawing.Point(197, 159);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(75, 23);
-            this.cancelButton.TabIndex = 6;
+            this.cancelButton.TabIndex = 9;
             this.cancelButton.Text = "Cancel";
             this.cancelButton.UseVisualStyleBackColor = true;
             this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
             // 
             // saveButton
             // 
-            this.saveButton.Location = new System.Drawing.Point(116, 144);
+            this.saveButton.Location = new System.Drawing.Point(116, 159);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(75, 23);
-            this.saveButton.TabIndex = 7;
+            this.saveButton.TabIndex = 8;
             this.saveButton.Text = "Save";
             this.saveButton.UseVisualStyleBackColor = true;
             this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
@@ -103,7 +104,7 @@
             this.noPopupsCheckBox.Location = new System.Drawing.Point(12, 36);
             this.noPopupsCheckBox.Name = "noPopupsCheckBox";
             this.noPopupsCheckBox.Size = new System.Drawing.Size(259, 18);
-            this.noPopupsCheckBox.TabIndex = 8;
+            this.noPopupsCheckBox.TabIndex = 2;
             this.noPopupsCheckBox.Text = "Do not open popups";
             this.noPopupsCheckBox.UseVisualStyleBackColor = true;
             this.noPopupsCheckBox.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
@@ -114,16 +115,16 @@
             this.foldersFirstCheck.Location = new System.Drawing.Point(12, 86);
             this.foldersFirstCheck.Name = "foldersFirstCheck";
             this.foldersFirstCheck.Size = new System.Drawing.Size(259, 17);
-            this.foldersFirstCheck.TabIndex = 9;
+            this.foldersFirstCheck.TabIndex = 4;
             this.foldersFirstCheck.Text = "Folders first";
             this.foldersFirstCheck.UseVisualStyleBackColor = true;
             // 
             // resetButton
             // 
-            this.resetButton.Location = new System.Drawing.Point(35, 144);
+            this.resetButton.Location = new System.Drawing.Point(35, 159);
             this.resetButton.Name = "resetButton";
             this.resetButton.Size = new System.Drawing.Size(75, 23);
-            this.resetButton.TabIndex = 10;
+            this.resetButton.TabIndex = 7;
             this.resetButton.Text = "Reset";
             this.resetButton.UseVisualStyleBackColor = true;
             this.resetButton.Click += new System.EventHandler(this.resetButton_Click);
@@ -131,7 +132,7 @@
             // iconQualityLabel
             // 
             this.iconQualityLabel.AutoSize = true;
-            this.iconQualityLabel.Location = new System.Drawing.Point(13, 112);
+            this.iconQualityLabel.Location = new System.Drawing.Point(13, 135);
             this.iconQualityLabel.Name = "iconQualityLabel";
             this.iconQualityLabel.Size = new System.Drawing.Size(61, 13);
             this.iconQualityLabel.TabIndex = 12;
@@ -145,17 +146,28 @@
             "Small",
             "Medium",
             "Big"});
-            this.iconQuality.Location = new System.Drawing.Point(150, 109);
+            this.iconQuality.Location = new System.Drawing.Point(150, 132);
             this.iconQuality.Name = "iconQuality";
             this.iconQuality.Size = new System.Drawing.Size(121, 21);
-            this.iconQuality.TabIndex = 13;
+            this.iconQuality.TabIndex = 6;
             this.iconQuality.SelectedIndexChanged += new System.EventHandler(this.iconQuality_SelectedIndexChanged);
+            // 
+            // runWithWindows
+            // 
+            this.runWithWindows.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.runWithWindows.Location = new System.Drawing.Point(12, 109);
+            this.runWithWindows.Name = "runWithWindows";
+            this.runWithWindows.Size = new System.Drawing.Size(259, 17);
+            this.runWithWindows.TabIndex = 5;
+            this.runWithWindows.Text = "Run with windows";
+            this.runWithWindows.UseVisualStyleBackColor = true;
             // 
             // ConfigForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 173);
+            this.ClientSize = new System.Drawing.Size(284, 191);
+            this.Controls.Add(this.runWithWindows);
             this.Controls.Add(this.iconQuality);
             this.Controls.Add(this.iconQualityLabel);
             this.Controls.Add(this.resetButton);
@@ -191,6 +203,7 @@
         private System.Windows.Forms.Button resetButton;
         private System.Windows.Forms.Label iconQualityLabel;
         private System.Windows.Forms.ComboBox iconQuality;
+        private System.Windows.Forms.CheckBox runWithWindows;
 
     }
 }

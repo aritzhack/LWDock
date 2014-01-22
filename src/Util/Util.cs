@@ -67,18 +67,16 @@ namespace LWDock
         public static Size getSquarest(int amount, bool vertical, bool popup)
         {
             if (amount == 0) return new Size(0, 0);
-            Size temp = new Size(vertical ? 0 : amount, vertical ? amount : 0);
             if (Settings.getInstance().tryOneLine && !popup) return new Size(amount, 1);
-            int sqrt = (int)Math.Ceiling(Math.Sqrt(amount));
 
-            while (amount % sqrt != 0)
+            while (amount % (int)Math.Ceiling(Math.Sqrt(amount)) != 0)
             {
-                if (sqrt == amount) break;
-                sqrt++;
+//                if (sqrt == amount) break;
+                amount++;
             }
 
-            int big = sqrt;
-            int small = amount / sqrt;
+            int big = (int)Math.Ceiling(Math.Sqrt(amount));
+            int small = amount / big;
             return new Size(vertical ? small : big, vertical ? big : small);
         }
 

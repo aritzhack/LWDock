@@ -20,6 +20,7 @@ namespace LWDock.Forms
             this.noPopupsCheckBox.Checked = Settings.getInstance().maxPopups == 0;
             this.foldersFirstCheck.Checked = Settings.getInstance().foldersFirst;
             this.iconQuality.SelectedIndex = Settings.getInstance().iconQuality;
+            this.runWithWindows.Checked = Settings.getInstance().runWithWindows;
             this.initializing = false;
         }
 
@@ -34,6 +35,7 @@ namespace LWDock.Forms
             Settings.getInstance().keepOnTop = this.keepOnTopCheckBox.Checked;
             Settings.getInstance().foldersFirst = this.foldersFirstCheck.Checked;
             Settings.getInstance().iconQuality = this.iconQuality.SelectedIndex;
+            Settings.getInstance().runWithWindows = this.runWithWindows.Checked;
             Settings.getInstance().OnChanged();
             Settings.getInstance().save();
             this.Close();
@@ -53,6 +55,7 @@ namespace LWDock.Forms
             this.keepOnTopCheckBox.Checked = Settings.getInstance().keepOnTop;
             this.noPopupsCheckBox.Checked = Settings.getInstance().maxPopups == 0;
             this.foldersFirstCheck.Checked = Settings.getInstance().foldersFirst;
+            this.runWithWindows.Checked = Settings.getInstance().runWithWindows;
             this.initializing = true;
         }
 

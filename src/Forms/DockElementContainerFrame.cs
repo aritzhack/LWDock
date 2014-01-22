@@ -11,23 +11,21 @@ namespace LWDock
 
         protected Size squareAmount;
         protected List<DockElement> elements;
+        protected DockElement currPopupElement;
         protected bool initialized = false;
+        protected readonly bool isPopup;
         public int maxNesting;
 
-        public DockElementContainerFrame()
+        public DockElementContainerFrame(string baseFolder, int maxNesting, bool popup)
+            : this(new List<string>(Directory.EnumerateFileSystemEntries(baseFolder)), maxNesting, popup)
         {
 
         }
 
-        public DockElementContainerFrame(string baseFolder, int maxNesting)
+        public DockElementContainerFrame(List<string> paths, int maxNesting, bool popup)
         {
             this.maxNesting = maxNesting;
-            this.init(new List<string>(Directory.EnumerateFileSystemEntries(baseFolder)));
-        }
-
-        public DockElementContainerFrame(List<string> paths, int maxNesting)
-        {
-            this.maxNesting = maxNesting;
+            this.isPopup = popup;
             this.init(paths);
         }
 
@@ -42,8 +40,8 @@ namespace LWDock
             DockElementContainerFrame.cleanList(ref paths);
 
             this.Controls.Clear();
-            this.squareAmount = Util.getSquarest(paths.Count, false, this.isPopup());
-            this.squareAmount = Util.improveSquares(this.squareAmount);
+            this.squareAmount = Util.getSquarest(paths.Count, false, this.isPopup);
+            if (!this.isPopup) this.squareAmount = Util.improveSquares(this.squareAmount);
 
             this.elements = new List<DockElement>(squareAmount.Width * squareAmount.Height);
 
@@ -114,6 +112,15 @@ namespace LWDock
         {
         }
 
-        protected abstract bool isPopup();
+        public void OnPopupOpening(DockElement popupElement)
+        {
+            if (this.currPopupElement != null && this.currPopupElement != popupElement)
+            {
+                this.currPopupElement.closePopup();
+            }
+
+            this.currPopupElement = popupElement;
+
+        }
     }
 }

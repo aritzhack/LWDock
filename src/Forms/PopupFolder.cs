@@ -9,7 +9,7 @@ namespace LWDock
     {
         private DockElement parentContainer;
 
-        public PopupFolder(DockElement parent, List<string> paths, int maxNesting) : base(paths, maxNesting)
+        public PopupFolder(DockElement parent, List<string> paths, int maxNesting) : base(paths, maxNesting, true)
         {
             this.parentContainer = parent;
             this.InitializeComponent();
@@ -21,14 +21,14 @@ namespace LWDock
         protected override void init(List<string> paths)
         {
  	        base.init(paths);
-            this.Size = DockElement.getFinalSize(this.squareAmount);
-            this.Size = new Size(this.Size.Width + (this.Width - this.ClientSize.Width) / 2, this.Size.Height + (this.Height - this.ClientSize.Height));
         }
 
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
-            this.Location = new Point(this.parentContainer.frame.DesktopLocation.X + this.parentContainer.button.Location.X, this.parentContainer.frame.Location.Y - this.Height);
+            this.Size = DockElement.getFinalSize(this.squareAmount);
+            this.Size = new Size(this.Size.Width + (this.Width - this.ClientSize.Width) / 2, this.Size.Height + (this.Height - this.ClientSize.Height));
+            this.Location = new Point(this.parentContainer.frame.DesktopLocation.X + this.parentContainer.button.Location.X - this.ClientRectangle.Width / 2 + (this.Width - this.ClientSize.Width) / 2, this.parentContainer.frame.Location.Y - this.Height);
         }
 
         public void closing(object sender, EventArgs args){
@@ -40,11 +40,6 @@ namespace LWDock
             base.close();
             this.Close();
             this.parentContainer.frame.close();
-        }
-
-        protected override bool isPopup()
-        {
-            return true;
         }
     }
 }

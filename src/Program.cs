@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace LWDock
 {
@@ -11,7 +12,11 @@ namespace LWDock
         [STAThread]
         static void Main(string[] args)
         {
+
+#if DEBUG
             CHelloWorld.sayHello();
+#endif
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 

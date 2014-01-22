@@ -97,6 +97,7 @@ namespace LWDock
         private void openPopup()
         {
             this.popup = new PopupFolder(this, new List<string>(Directory.EnumerateFileSystemEntries(path)), this.maxNesting-1);
+            this.frame.OnPopupOpening(this);
             this.popup.Show();
             this.button.BackColor = Color.Red;
         }

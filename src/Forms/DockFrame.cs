@@ -18,7 +18,7 @@ namespace LWDock
         private Timer timer;
         public bool alwaysOnTop;
 
-        public DockFrame(String folder) : base(folder, Settings.getInstance().maxPopups)
+        public DockFrame(String folder) : base(folder, Settings.getInstance().maxPopups, false)
         {
             InitializeComponent();
             Settings.getInstance().path = folder;
@@ -176,11 +176,6 @@ namespace LWDock
         {
             base.OnClosing(e);
             Settings.getInstance().save();
-        }
-
-        protected override bool isPopup()
-        {
-            return false;
         }
     }
 }
