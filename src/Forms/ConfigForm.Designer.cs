@@ -39,6 +39,7 @@
             this.iconQualityLabel = new System.Windows.Forms.Label();
             this.iconQuality = new System.Windows.Forms.ComboBox();
             this.runWithWindows = new System.Windows.Forms.CheckBox();
+            this.preloadPopups = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.maxPopupsNumber)).BeginInit();
             this.SuspendLayout();
             // 
@@ -80,7 +81,7 @@
             // 
             // cancelButton
             // 
-            this.cancelButton.Location = new System.Drawing.Point(197, 159);
+            this.cancelButton.Location = new System.Drawing.Point(197, 190);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(75, 23);
             this.cancelButton.TabIndex = 9;
@@ -90,7 +91,7 @@
             // 
             // saveButton
             // 
-            this.saveButton.Location = new System.Drawing.Point(116, 159);
+            this.saveButton.Location = new System.Drawing.Point(116, 190);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(75, 23);
             this.saveButton.TabIndex = 8;
@@ -121,7 +122,7 @@
             // 
             // resetButton
             // 
-            this.resetButton.Location = new System.Drawing.Point(35, 159);
+            this.resetButton.Location = new System.Drawing.Point(35, 190);
             this.resetButton.Name = "resetButton";
             this.resetButton.Size = new System.Drawing.Size(75, 23);
             this.resetButton.TabIndex = 7;
@@ -132,7 +133,7 @@
             // iconQualityLabel
             // 
             this.iconQualityLabel.AutoSize = true;
-            this.iconQualityLabel.Location = new System.Drawing.Point(13, 135);
+            this.iconQualityLabel.Location = new System.Drawing.Point(14, 158);
             this.iconQualityLabel.Name = "iconQualityLabel";
             this.iconQualityLabel.Size = new System.Drawing.Size(61, 13);
             this.iconQualityLabel.TabIndex = 12;
@@ -146,7 +147,7 @@
             "Small",
             "Medium",
             "Big"});
-            this.iconQuality.Location = new System.Drawing.Point(150, 132);
+            this.iconQuality.Location = new System.Drawing.Point(151, 155);
             this.iconQuality.Name = "iconQuality";
             this.iconQuality.Size = new System.Drawing.Size(121, 21);
             this.iconQuality.TabIndex = 6;
@@ -162,11 +163,23 @@
             this.runWithWindows.Text = "Run with windows";
             this.runWithWindows.UseVisualStyleBackColor = true;
             // 
+            // preloadPopups
+            // 
+            this.preloadPopups.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.preloadPopups.Location = new System.Drawing.Point(13, 132);
+            this.preloadPopups.Name = "preloadPopups";
+            this.preloadPopups.Size = new System.Drawing.Size(259, 17);
+            this.preloadPopups.TabIndex = 13;
+            this.preloadPopups.Text = "Preload popups";
+            this.preloadPopups.UseVisualStyleBackColor = true;
+            this.preloadPopups.CheckedChanged += new System.EventHandler(this.preloadPopups_CheckedChanged);
+            // 
             // ConfigForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 191);
+            this.ClientSize = new System.Drawing.Size(284, 220);
+            this.Controls.Add(this.preloadPopups);
             this.Controls.Add(this.runWithWindows);
             this.Controls.Add(this.iconQuality);
             this.Controls.Add(this.iconQualityLabel);
@@ -204,6 +217,7 @@
         private System.Windows.Forms.Label iconQualityLabel;
         private System.Windows.Forms.ComboBox iconQuality;
         private System.Windows.Forms.CheckBox runWithWindows;
+        private System.Windows.Forms.CheckBox preloadPopups;
 
     }
 }

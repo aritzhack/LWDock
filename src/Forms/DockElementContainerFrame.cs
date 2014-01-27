@@ -6,7 +6,7 @@ using System.IO;
 
 namespace LWDock
 {
-    public abstract class DockElementContainerFrame : BorderlessFrame
+    public class DockElementContainerFrame : BorderlessFrame
     {
 
         protected Size squareAmount;
@@ -44,6 +44,7 @@ namespace LWDock
             if (!this.isPopup) this.squareAmount = Util.improveSquares(this.squareAmount);
 
             this.elements = new List<DockElement>(squareAmount.Width * squareAmount.Height);
+            this.Size = DockElement.getFinalSize(this.squareAmount);
 
             for (int y = 0; y < squareAmount.Height; y++)
             {
@@ -64,7 +65,7 @@ namespace LWDock
                 }
             }
 
-            this.Size = DockElement.getFinalSize(this.squareAmount);
+            
             if(this.initialized) this.Visible = true;
         }
 
@@ -97,6 +98,10 @@ namespace LWDock
             base.OnLoad(e);
             this.initialized = true;
             this.BackColor = Color.LightGray;
+            foreach (DockElement element in this.elements)
+            {
+                element.initPopup();
+            }
         }
 
         protected override void OnClosed(EventArgs e)
@@ -120,7 +125,6 @@ namespace LWDock
             }
 
             this.currPopupElement = popupElement;
-
         }
     }
 }

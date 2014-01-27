@@ -96,7 +96,7 @@ namespace LWDock
 
         private void openPopup()
         {
-            this.popup = new PopupFolder(this, new List<string>(Directory.EnumerateFileSystemEntries(path)), this.maxNesting-1);
+            if(this.popup == null) this.popup = new PopupFolder(this, new List<string>(Directory.EnumerateFileSystemEntries(path)), this.maxNesting-1);
             this.frame.OnPopupOpening(this);
             this.popup.Show();
             this.button.BackColor = Color.Red;
@@ -105,8 +105,8 @@ namespace LWDock
         public void closePopup()
         {
             if (this.popup == null) return;
-            this.popup.Close();
-            this.popup = null;
+            this.popup.Hide();
+            //this.popup = null;
             this.button.BackColor = Color.Transparent;
         }
 
@@ -118,11 +118,10 @@ namespace LWDock
 
         public void closeChild()
         {
-            if (this.popup != null) this.popup.Close();
+            this.closePopup();
         }
 
         public void onChildClosed() {
-            this.popup = null;
             this.button.BackColor = Color.Transparent;
             this.frame.Focus();
         }
@@ -130,6 +129,15 @@ namespace LWDock
         public static Size getFinalSize(Size squareAmount)
         {
             return new Size(squareAmount.Width * DockElement.HBUTTON_SIZE + DockElement.HMARGIN_BETWEEN_BUTTONS, (DockElement.VBUTTON_SIZE) * squareAmount.Height + DockElement.TOP_BUTTON_MARGIN);
+        }
+
+        internal void initPopup()
+        {
+            if (this.isNonEmptyFolder && Settings.getInstance().preloadPopups)
+            {
+                this.openPopup();
+                this.closePopup();
+            }
         }
     }
 }

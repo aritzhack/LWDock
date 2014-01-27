@@ -23,18 +23,15 @@ namespace LWDock
         {
             if (ShellFile.IsPlatformSupported && ShellFolder.IsPlatformSupported && Settings.getInstance().iconQuality != (int)IconQuality.Minimum)
             {
-                ShellObject shObj;
-                Bitmap bm;
+
 
                 if (Directory.Exists(filename))
                 {
-                    shObj = ShellFolder.FromParsingName(filename);
                     return GetLargeIcon(filename).ToBitmap();
                 }
-                else
-                {
-                    shObj = ShellFile.FromFilePath(filename);
-                }
+
+                ShellObject shObj = ShellFile.FromFilePath(filename);
+                Bitmap bm = null;
 
                 ShellThumbnail thumbnail = shObj.Thumbnail;
                 int quality = Settings.getInstance().iconQuality;
@@ -44,14 +41,13 @@ namespace LWDock
                     if (bm != null)
                     {
                         shObj.Dispose();
-
                         bm.MakeTransparent(Color.Black);
                         return bm;
                     }
                 }
                 catch
                 {
-                    bm = null;
+                    if (bm != null) bm.Dispose();
                 }
                 shObj.Dispose();
             }

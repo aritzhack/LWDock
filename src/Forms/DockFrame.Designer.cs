@@ -1,6 +1,6 @@
 ﻿namespace LWDock
 {
-    public partial class DockFrame
+    public partial class DockFrame : DockElementContainerFrame
     {
         /// <summary>
         /// Variable del diseñador requerida.

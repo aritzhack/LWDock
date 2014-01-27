@@ -24,17 +24,6 @@ namespace LWDock
             Settings.getInstance().path = folder;
             this.folder = folder;
             this.init();
-            GraphicsPath path = new GraphicsPath(FillMode.Winding);
-            const int circleSize = 50;
-            path.AddEllipse(0, 0, circleSize, circleSize);
-            path.AddEllipse(this.Width - circleSize, 0, circleSize, circleSize);
-            //path.AddEllipse(this.Width - circleSize, this.Height-circleSize, circleSize, circleSize);
-            //path.AddEllipse(0, this.Height - circleSize, circleSize, circleSize);
-
-            path.AddRectangle(new Rectangle(circleSize/2, 0, this.Width-circleSize, this.Height));
-            path.AddRectangle(new Rectangle(0, circleSize / 2, this.Width, this.Height - circleSize/2));
-
-            this.Region = new Region(path);
             Settings.getInstance().Changed += this.setttingsUpdated;
         }
 
@@ -80,7 +69,15 @@ namespace LWDock
             this.timer.Start();
             this.updatePositions();
             this.Location = new Point(centerX, yPos);
+            GraphicsPath path = new GraphicsPath(FillMode.Winding);
+            const int circleSize = 50;
+            path.AddEllipse(0, 0, circleSize, circleSize);
+            path.AddEllipse(this.Width - circleSize, 0, circleSize, circleSize);
 
+            path.AddRectangle(new Rectangle(circleSize / 2, 0, this.Width - circleSize, this.Height));
+            path.AddRectangle(new Rectangle(0, circleSize / 2, this.Width, this.Height - circleSize / 2));
+
+            this.Region = new Region(path);
         }
 
         private void reloadToolStripMenuItem_Click(object sender, EventArgs e)

@@ -4,6 +4,8 @@ using System;
 using Microsoft.Win32;
 using System.Windows.Forms;
 using System.Reflection;
+using System.Text;
+using System.IO;
 
 namespace LWDock
 {
@@ -23,15 +25,15 @@ namespace LWDock
 
         public static Settings getInstance()
         {
-            if (INSTANCE == null) INSTANCE = new Settings(@".\config.ini");
+            if (INSTANCE == null) INSTANCE = new Settings(PATH_DEFAULT);
             return INSTANCE;
         }
 
-        public const bool FOLDER_FIRST_DEFAULT = true, TRY_ONE_LINE_DEFAULT = true, KEEP_ON_TOP_DEFAULT = false, SIMPLE_ICONS_DEFAULT = false, RUN_WITH_WINDOWS_DEFAULT = false;
-        public const int MAX_POPUPS_DEFAULT = -1, DEFAULT_ICON_QUALITY = 2;
-        public const string PATH_DEFAULT = "";
+        public const bool FOLDER_FIRST_DEFAULT = true, TRY_ONE_LINE_DEFAULT = true, KEEP_ON_TOP_DEFAULT = false, SIMPLE_ICONS_DEFAULT = false, RUN_WITH_WINDOWS_DEFAULT = false, PRELOAD_POPUPS_DEFAULT = false;
+        public const int MAX_POPUPS_DEFAULT = -1, ICON_QUALITY_DEFAULT = 2;
+        public static readonly string PATH_DEFAULT = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "config.ini");
 
-        public bool foldersFirst, tryOneLine, keepOnTop, runWithWindows;
+        public bool foldersFirst, tryOneLine, keepOnTop, runWithWindows, preloadPopups;
         public int maxPopups, iconQuality;
         public string path;
 
@@ -48,12 +50,14 @@ namespace LWDock
             IniFile ini = new IniFile(this.file);
             this.config = this.saver.readFile();
             this.maxPopups = Util.parseInt(this.config.getValue("maxPopups"), MAX_POPUPS_DEFAULT);
-            this.iconQuality = Util.parseInt(this.config.getValue("iconQuality"), DEFAULT_ICON_QUALITY);
+            this.iconQuality = Util.parseInt(this.config.getValue("iconQuality"), ICON_QUALITY_DEFAULT);
             this.keepOnTop = Util.parseBool(this.config.getValue("keepOnTop"), KEEP_ON_TOP_DEFAULT);
             this.tryOneLine = Util.parseBool(this.config.getValue("tryOneLine"), TRY_ONE_LINE_DEFAULT);
             this.foldersFirst = Util.parseBool(this.config.getValue("foldersFirst"), FOLDER_FIRST_DEFAULT);
             this.runWithWindows = Util.parseBool(this.config.getValue("runWithWindows"), RUN_WITH_WINDOWS_DEFAULT);
+            this.preloadPopups = Util.parseBool(this.config.getValue("preloadPopups"), PRELOAD_POPUPS_DEFAULT);
             this.path = this.config.getValue("path");
+            if (this.path == null || this.path.Length == 0) this.path = PATH_DEFAULT;
             this.save();
         }
 
@@ -67,8 +71,9 @@ namespace LWDock
             this.keepOnTop = KEEP_ON_TOP_DEFAULT;
             this.tryOneLine = TRY_ONE_LINE_DEFAULT;
             this.foldersFirst = FOLDER_FIRST_DEFAULT;
-            this.iconQuality = DEFAULT_ICON_QUALITY;
+            this.iconQuality = ICON_QUALITY_DEFAULT;
             this.runWithWindows = RUN_WITH_WINDOWS_DEFAULT;
+            this.preloadPopups = PRELOAD_POPUPS_DEFAULT;
             // this.path = PATH_DEFAULT;
         }
 
@@ -81,6 +86,7 @@ namespace LWDock
             this.config.setProperty("runWithWindows", this.runWithWindows);
             this.config.setProperty("path", this.path);
             this.config.setProperty("iconQuality", this.iconQuality);
+            this.config.setProperty("preloadPopups", this.preloadPopups);
             this.OnChanged();
             saver.writeConfig(config);
         }
@@ -95,26 +101,37 @@ namespace LWDock
             string key = System.Reflection.Assembly.GetExecutingAssembly().GetName().Name;
             string value = Assembly.GetEntryAssembly().Location;
 
-            if (this.runWithWindows)
+            int i = 0;
+            string key2 = key + i;
+            while (rk.GetValue(key2) != null && !rk.GetValue(key2).Equals(value)) 
+                key2 = key + (++i);
+
+            if (this.runWithWindows) rk.SetValue(key2, value);
+            else rk.DeleteValue(key2, false);
+        }
+
+        public string getSettings()
+        {
+            StringBuilder ret = new StringBuilder("Settings:\n").Append(Path.GetFullPath(this.saver.getConfigFile())).Append("\n{\n");
+            
+            foreach(String key in this.config.getProperties().Keys)
             {
-                int i = 0;
-                string key2 = key + i;
-                while(rk.GetValue(key2) != null && !rk.GetValue(key2).Equals(value))
-                {
-                    key2 = key + (++i);
-                }
-                rk.SetValue(key2, value);
+                ret.Append("\t").Append(key).Append(" = ").Append(this.config.getProperty(key).value).Append("\n");
             }
-            else
-            {
-                int i = 0;
-                string key2 = key + i;
-                while (rk.GetValue(key2) != null && !rk.GetValue(key2).Equals(value))
-                {
-                    key2 = key + (++i);
-                }
-                rk.DeleteValue(key2, false);
-            }
+            ret.Append("}");
+            return ret.ToString();
+        }
+
+        public bool areDefault()
+        {
+            return 
+                this.maxPopups == MAX_POPUPS_DEFAULT &&
+                this.path == PATH_DEFAULT &&
+                this.runWithWindows == RUN_WITH_WINDOWS_DEFAULT &&
+                this.tryOneLine == TRY_ONE_LINE_DEFAULT &&
+                this.keepOnTop == KEEP_ON_TOP_DEFAULT &&
+                this.foldersFirst == FOLDER_FIRST_DEFAULT &&
+                this.preloadPopups == PRELOAD_POPUPS_DEFAULT;
         }
     }
 }

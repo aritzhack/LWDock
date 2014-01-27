@@ -15,8 +15,6 @@ namespace LWDock
             this.Image = Util.resize(icon, DockElement.BUTTON_SIZE, DockElement.BUTTON_SIZE);
             this.Size = size;
             this.Location = location;
-
-            
         }
     }
 }

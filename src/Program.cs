@@ -15,8 +15,13 @@ namespace LWDock
 
 #if DEBUG
             CHelloWorld.sayHello();
+
+            string message;
+            if (args.Length != 0) MessageBox.Show("{\n\t" + String.Join(",\n\t", args) + "\n}", "Arguments", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            if(!Settings.getInstance().areDefault()) MessageBox.Show(Settings.getInstance().getSettings(), "Settings", MessageBoxButtons.OK, MessageBoxIcon.Information);
 #endif
 
+            Settings.getInstance().getSettings();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
