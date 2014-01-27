@@ -25,13 +25,13 @@ namespace LWDock
 
         public static Settings getInstance()
         {
-            if (INSTANCE == null) INSTANCE = new Settings(PATH_DEFAULT);
+            if (INSTANCE == null) INSTANCE = new Settings(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "config.ini"));
             return INSTANCE;
         }
 
         public const bool FOLDER_FIRST_DEFAULT = true, TRY_ONE_LINE_DEFAULT = true, KEEP_ON_TOP_DEFAULT = false, SIMPLE_ICONS_DEFAULT = false, RUN_WITH_WINDOWS_DEFAULT = false, PRELOAD_POPUPS_DEFAULT = false;
         public const int MAX_POPUPS_DEFAULT = -1, ICON_QUALITY_DEFAULT = 2;
-        public static readonly string PATH_DEFAULT = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "config.ini");
+        public static readonly string PATH_DEFAULT = "";
 
         public bool foldersFirst, tryOneLine, keepOnTop, runWithWindows, preloadPopups;
         public int maxPopups, iconQuality;
