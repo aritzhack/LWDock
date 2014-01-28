@@ -41,5 +41,12 @@ namespace LWDock
             this.Close();
             this.parentContainer.frame.close();
         }
+
+        public override void OnButtonRun()
+        {
+            base.OnButtonRun();
+            this.Hide();
+            this.parentContainer.frame.OnButtonRun();
+        }
     }
 }

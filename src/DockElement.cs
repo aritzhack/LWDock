@@ -14,7 +14,7 @@ namespace LWDock
         public Button button;
         public Label label;
         private readonly bool isNonEmptyFolder;
-        private PopupFolder popup;
+        public PopupFolder popup;
         public DockElementContainerFrame frame;
         private int x, y;
 
@@ -76,6 +76,7 @@ namespace LWDock
 
         public void button_Click(object sender, MouseEventArgs e)
         {
+
             if (e.Button == MouseButtons.Right)
             {
 
@@ -106,6 +107,7 @@ namespace LWDock
         {
             if (this.popup == null) return;
             this.popup.Hide();
+            if (this.popup.currPopupElement != null) this.popup.currPopupElement.onChildClosed();
             //this.popup = null;
             this.button.BackColor = Color.Transparent;
         }
@@ -113,7 +115,8 @@ namespace LWDock
         private void openFileFolder()
         {
             System.Diagnostics.Process.Start(this.path);
-            if (!(this.frame is DockFrame)) this.frame.close();
+            this.frame.OnButtonRun();                
+            this.button.BackColor = Color.Transparent;
         }
 
         public void closeChild()
@@ -124,6 +127,7 @@ namespace LWDock
         public void onChildClosed() {
             this.button.BackColor = Color.Transparent;
             this.frame.Focus();
+            this.closeChild();
         }
 
         public static Size getFinalSize(Size squareAmount)

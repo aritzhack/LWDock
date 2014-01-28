@@ -11,7 +11,7 @@ namespace LWDock
 
         protected Size squareAmount;
         protected List<DockElement> elements;
-        protected DockElement currPopupElement;
+        public DockElement currPopupElement;
         protected bool initialized = false;
         protected readonly bool isPopup;
         public int maxNesting;
@@ -91,6 +91,11 @@ namespace LWDock
             paths.Clear();
             paths.AddRange(ret);
             paths.AddRange(files);
+        }
+
+        public virtual void OnButtonRun()
+        {
+            if (this.currPopupElement != null) this.currPopupElement.button.BackColor = Color.Transparent;
         }
 
         protected override void OnLoad(EventArgs e)

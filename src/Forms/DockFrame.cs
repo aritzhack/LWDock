@@ -41,9 +41,20 @@ namespace LWDock
                 {
                     showTimeout = 0;
                     WAPI.SetForegroundWindow(this.Handle);
+                    this.setForegrounds();
                 }
             }
             else showTimeout = 0;
+        }
+
+        private void setForegrounds()
+        {
+            DockElement e = this.currPopupElement;
+            while (e != null && e.popup != null)
+            {
+                WAPI.SetForegroundWindow(e.popup.Handle);
+                e = e.popup.currPopupElement;
+            }
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -173,6 +184,12 @@ namespace LWDock
         {
             base.OnClosing(e);
             Settings.getInstance().save();
+        }
+
+        public override void OnButtonRun()
+        {
+            base.OnButtonRun();
+            // Do nothing
         }
     }
 }
